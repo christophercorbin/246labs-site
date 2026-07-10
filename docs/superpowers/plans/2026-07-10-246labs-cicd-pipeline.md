@@ -21,7 +21,8 @@
 - **GitHub PAT** for Amplify's repo connection is supplied only via `TF_VAR_github_access_token`; never committed.
 - **SES** runs in `687159379702`; the Amplify compute role grants `ses:SendEmail`/`ses:SendRawEmail` on the verified identity.
 - **Node 22** in CI. CI required status check name: `verify`.
-- Prereqs on the executing machine: `terraform`, `gh` (authenticated), `aws` CLI with `personal-246labs`.
+- **Toolchain:** OpenTofu (`tofu`) is used in place of `terraform` — they are drop-in compatible (identical HCL/providers; only the CLI command name differs). Substitute `tofu` for `terraform` in every command in this plan. The `.tf` file contents are unchanged.
+- Prereqs on the executing machine: `tofu` (OpenTofu), `gh` (authenticated), `aws` CLI with `personal-246labs`.
 - Secrets never committed; `infra/.gitignore` excludes `*.tfstate*`, `.terraform/`, `*.tfvars`.
 
 ## File Structure
