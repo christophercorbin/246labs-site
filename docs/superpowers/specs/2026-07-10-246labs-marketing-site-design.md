@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-10
 **Status:** Approved (design), pending implementation plan
-**Domain:** `246labs.bb`
+**Domain:** `246labs.cloud` (primary; `.bb` explicitly not used)
 
 ## Overview
 
@@ -138,10 +138,17 @@ replace before launch. No fabricated client names or case studies.
 
 - Git repository connected to AWS Amplify Hosting.
 - Amplify build settings for a Next.js SSR app.
-- Custom domain `246labs.bb` with managed SSL.
+- Custom domain `246labs.cloud` with managed SSL.
 - Environment variables for SES configured in Amplify (not committed).
 - SES sender identity and recipient must be verified in the target AWS account
   before the form works in production.
+
+## Domain
+
+- **Primary:** `246labs.cloud` (register at any standard registrar; ~$20–25/yr).
+  The Barbados `.bb` TLD is explicitly **not** used.
+- Contact email placeholder derives from this domain (e.g. `hello@246labs.cloud`)
+  until a real inbox is provided.
 
 ## Open Items for Implementation Plan
 
