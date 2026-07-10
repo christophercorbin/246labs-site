@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 246Labs Marketing Site
 
-## Getting Started
+Next.js (App Router) + Tailwind. Deployed on AWS Amplify Hosting.
 
-First, run the development server:
-
+## Local dev
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd web
+npm install
+npm run dev      # http://localhost:3000
+npm test         # Vitest
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
+Copy `.env.example` to `.env.local` and fill in for local contact testing.
+In production, set these in the Amplify console (never commit secrets):
+`SES_REGION`, `SES_SENDER`, `SES_RECIPIENT`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy (AWS Amplify)
+1. Push this repo to GitHub/CodeCommit.
+2. Amplify Console → New app → Host web app → connect the repo/branch.
+3. Amplify auto-detects `amplify.yml` (monorepo `appRoot: web`).
+4. Add env vars `SES_REGION`, `SES_SENDER`, `SES_RECIPIENT`.
+5. Add custom domain `246labs.cloud` in Amplify → Domain management.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SES prerequisites (one-time, owner)
+- Verify `SES_SENDER` (domain or address) in the target AWS account/region.
+- If SES is in sandbox, verify `SES_RECIPIENT` too, or request production access.
+- Grant the Amplify compute role `ses:SendEmail` permission.
