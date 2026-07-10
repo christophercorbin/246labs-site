@@ -27,9 +27,30 @@ export function ContactForm() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("bad status");
-      setStatus("sent");
-      form.reset();
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+        return;
+      }
+      let body: unknown;
+      try {
+        body = await res.json();
+      } catch {
+        body = undefined;
+      }
+      if (
+        res.status === 400 &&
+        body &&
+        typeof body === "object" &&
+        "errors" in body &&
+        typeof (body as { errors?: unknown }).errors === "object" &&
+        (body as { errors?: unknown }).errors !== null
+      ) {
+        setErrors((body as { errors: Record<string, string> }).errors);
+        setStatus("idle");
+        return;
+      }
+      setStatus("error");
     } catch {
       setStatus("error");
     }
@@ -37,7 +58,11 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <p className="rounded-tile border border-hairline bg-white p-6 text-ink">
+      <p
+        role="status"
+        aria-live="polite"
+        className="rounded-tile border border-hairline bg-white p-6 text-ink"
+      >
         Thanks — we&apos;ll be in touch shortly.
       </p>
     );
@@ -68,11 +93,11 @@ export function ContactForm() {
           className="mt-1 w-full rounded-tile-sm border border-hairline bg-white p-3 text-ink"
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-traffic-red">{errors.message}</p>
+          <p role="alert" className="mt-1 text-sm text-traffic-red">{errors.message}</p>
         )}
       </div>
       {status === "error" && (
-        <p className="text-sm text-traffic-red">
+        <p role="alert" className="text-sm text-traffic-red">
           Something went wrong sending your message. Please try again.
         </p>
       )}
@@ -105,7 +130,7 @@ function Field({
         type={type}
         className="mt-1 w-full rounded-tile-sm border border-hairline bg-white p-3 text-ink"
       />
-      {error && <p className="mt-1 text-sm text-traffic-red">{error}</p>}
+      {error && <p role="alert" className="mt-1 text-sm text-traffic-red">{error}</p>}
     </div>
   );
 }
