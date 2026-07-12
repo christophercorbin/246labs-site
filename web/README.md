@@ -27,3 +27,4 @@ In production, set these in the Amplify console (never commit secrets):
 - Verify `SES_SENDER` (domain or address) in the target AWS account/region.
 - If SES is in sandbox, verify `SES_RECIPIENT` too, or request production access.
 - Grant the Amplify compute role `ses:SendEmail` permission.
+
