@@ -1,3 +1,11 @@
+data "aws_caller_identity" "current" {}
+
+locals {
+  # The Amplify app is created + GitHub-App-connected in the console; Terraform
+  # scopes the deploy role to that app's ARN (no wildcard across apps).
+  amplify_app_arn = "arn:aws:amplify:${var.aws_region}:${data.aws_caller_identity.current.account_id}:apps/${var.amplify_app_id}"
+}
+
 data "aws_iam_policy_document" "deploy_trust" {
   statement {
     effect  = "Allow"
@@ -37,8 +45,8 @@ data "aws_iam_policy_document" "deploy_perms" {
       "amplify:GetBranch",
     ]
     resources = [
-      aws_amplify_app.site.arn,
-      "${aws_amplify_app.site.arn}/*",
+      local.amplify_app_arn,
+      "${local.amplify_app_arn}/*",
     ]
   }
 }
