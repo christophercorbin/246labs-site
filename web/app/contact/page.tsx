@@ -3,6 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 export const metadata = {
   title: "Contact — 246Labs",
   description: "Start a project with 246Labs.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

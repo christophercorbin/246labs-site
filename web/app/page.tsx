@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { BootAnimation } from "@/components/BootAnimation";
 import { Button } from "@/components/Button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { SERVICE_GROUPS } from "@/lib/services";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

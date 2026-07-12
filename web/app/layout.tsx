@@ -20,6 +20,15 @@ export const metadata: Metadata = {
   description:
     "246Labs is a Caribbean cloud-engineering studio: AI, web & app development, AWS, DevOps, hosting, and security audits.",
   metadataBase: new URL("https://246labs.cloud"),
+  openGraph: {
+    siteName: "246Labs",
+    type: "website",
+    locale: "en_US",
+    url: "https://246labs.cloud",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

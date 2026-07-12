@@ -2,6 +2,7 @@ export const metadata = {
   title: "About — 246Labs",
   description:
     "246Labs is a Caribbean cloud-engineering studio. Precise about the work, proud of the place.",
+  alternates: { canonical: "/about" },
 };
 
 export default function About() {
