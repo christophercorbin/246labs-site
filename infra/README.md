@@ -46,10 +46,13 @@ and the `amplify-246labs-compute` SES role.
 
 ## Step 4 — Attach the compute role to the app (SES runtime permission)
 ```bash
+# NOTE: --compute-role-arn is the SSR RUNTIME role; --iam-service-role-arn is
+# Amplify's SSR LOGGING role (leave the console-created AmplifySSRLoggingRole there).
 aws amplify update-app \
   --app-id "<APP_ID_FROM_STEP_1>" \
-  --iam-service-role-arn "$(tofu output -raw amplify_compute_role_arn)" \
+  --compute-role-arn "$(tofu output -raw amplify_compute_role_arn)" \
   --profile personal-246labs --region us-east-1
+# Compute-role changes take effect on the NEXT deployment (trigger a release).
 ```
 
 ## Step 5 — Wire outputs into GitHub Actions variables
