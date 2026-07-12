@@ -1,0 +1,51 @@
+name: Deploy
+
+# Deploy runs only after the CI workflow ("CI") completes SUCCESSFULLY on main,
+# so a red build can never ship — the gate is structural, not just policy.
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Trigger and await Amplify release
+        env:
+          APP_ID: ${{ vars.AMPLIFY_APP_ID }}
+        run: |
+          set -euo pipefail
+          JOB_ID=$(aws amplify start-job \
+            --app-id "$APP_ID" --branch-name main --job-type RELEASE \
+            --query 'jobSummary.jobId' --output text)
+          echo "Started Amplify release job $JOB_ID"
+          # Bounded poll: 80 * 15s = 20 min ceiling, then fail (job timeout-minutes is a backstop).
+          for _ in $(seq 1 80); do
+            STATUS=$(aws amplify get-job \
+              --app-id "$APP_ID" --branch-name main --job-id "$JOB_ID" \
+              --query 'job.summary.status' --output text)
+            echo "status=$STATUS"
+            case "$STATUS" in
+              SUCCEED)          echo "Deploy succeeded"; exit 0 ;;
+              FAILED|CANCELLED) echo "Deploy $STATUS"; exit 1 ;;
+              *)                sleep 15 ;;
+            esac
+          done
+          echo "Timed out waiting for Amplify job $JOB_ID"; exit 1

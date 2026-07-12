@@ -1,0 +1,5 @@
+github_owner  = "your-github-username"
+github_repo   = "246labs-site"
+ses_sender    = "no-reply@246labs.cloud"
+ses_recipient = "hello@246labs.cloud"
+# github_access_token is provided via TF_VAR_github_access_token env var, NOT here.
