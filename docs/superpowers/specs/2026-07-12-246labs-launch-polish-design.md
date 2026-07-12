@@ -123,6 +123,38 @@ Implementation notes:
   preview against the handoff reference (human).
 - Delivery: single PR; `verify` must pass; auto-merge → OIDC deploy → live.
 
+## Addendum — audit items folded in (site-audit-2026-07-12.md)
+
+The independent content/QA audit added these to the batch:
+
+- **Privacy policy:** new `/privacy` page (plain, honest, no-analytics version:
+  form fields collected, delivered via Amazon SES to a Google Workspace inbox,
+  no cookies/tracking, contact email for removal requests) + footer link.
+- **Badge correction:** About page "AWS Partner" → **"Built on AWS"** (not APN
+  enrolled; AWS restricts the term). Update the About test accordingly.
+- **www → apex 301:** Amplify custom rule (`aws amplify update-app
+  --custom-rules`: `https://www.246labs.cloud` → `https://246labs.cloud`,
+  status 301) — provisioning step, not code. Plus `alternates.canonical` in
+  each page's metadata.
+- **Homepage H1:** add an `sr-only` `<h1>` "Cloud infrastructure, built in the
+  Caribbean." (visible heading would duplicate the animated tagline).
+- **Security headers** via `next.config.ts` `headers()`: HSTS
+  (`max-age=63072000; includeSubDomains`), `X-Content-Type-Options: nosniff`,
+  `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`,
+  minimal `Permissions-Policy` (camera/mic/geolocation off). Full CSP
+  deliberately deferred (needs nonce work with Next inline scripts; not worth
+  blocking this batch).
+- **Custom 404:** branded `app/not-found.tsx` (navy, mono "404", link home).
+- **Wordmark text extraction:** add an `sr-only` "b" inside the Logo wordmark
+  so copy/paste and crawlers read "246Labs" (aria-label already covers AT).
+- **Contact page polish:** add "We reply within 1 business day" + Barbados
+  location line; expand the contact meta description.
+- **Deferred to later batches (recorded):** analytics (provider signup;
+  keeps privacy policy simple), case study, LinkedIn page, full CSP.
+- Audit items already satisfied elsewhere: contact form e2e (tested live
+  2026-07-12, `{"ok":true}`), scaffold SVG cleanup + apple-touch-icon +
+  OG/sitemap/robots/JSON-LD (this spec's original scope).
+
 ## Decisions recorded
 
 - Icons/OG generated in code via `ImageResponse` (no design-tool exports;
