@@ -8,6 +8,9 @@ applications:
             - npm ci
         build:
           commands:
+            # Amplify injects app env vars into the build container only; persist
+            # the SES_* vars to .env.production so the SSR compute runtime sees them.
+            - env | grep -E '^SES_' >> .env.production
             - npm run build
       artifacts:
         baseDirectory: .next
