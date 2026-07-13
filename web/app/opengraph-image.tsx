@@ -98,7 +98,7 @@ export default async function OgImage() {
               height={90}
               style={{ marginLeft: 4, marginRight: 4, transform: "translateY(8px)" }}
             />
-            <span style={{ color: "#FFC726" }}>s</span>
+            <span style={{ color: "#FFFFFF" }}>s</span>
           </div>
         </div>
         <div
