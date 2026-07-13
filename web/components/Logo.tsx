@@ -11,7 +11,6 @@ export function Logo({
   animated = false,
   className = "",
 }: LogoProps) {
-  const accent = variant === "dark" ? "text-gold" : "text-flag-blue";
   const wordColor = variant === "dark" ? "text-white" : "text-flag-blue";
 
   return (
@@ -43,11 +42,11 @@ export function Logo({
         246La
         <span className="sr-only">b</span>
         <span
-          className="mark-mask inline-block h-[0.8em] w-[0.7em] translate-y-[0.08em] text-current"
+          className="mark-mask inline-block h-[0.8em] w-[0.7em] translate-y-[0.08em] text-gold"
           aria-hidden
           style={{ WebkitMaskImage: "url(/brand/map-white.png)", maskImage: "url(/brand/map-white.png)" }}
         />
-        <span className={accent}>s</span>
+        <span>s</span>
       </span>
     </span>
   );

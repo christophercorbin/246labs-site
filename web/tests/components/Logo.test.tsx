@@ -3,10 +3,21 @@ import { describe, it, expect } from "vitest";
 import { Logo } from "@/components/Logo";
 
 describe("Logo", () => {
-  it("renders the wordmark text with the accent final s", () => {
+  it("renders the wordmark text with a white final s", () => {
     render(<Logo />);
     expect(screen.getByText("246La")).toBeInTheDocument();
-    expect(screen.getByText("s")).toBeInTheDocument();
+    const s = screen.getByText("s");
+    expect(s).toBeInTheDocument();
+    // The final s is no longer the gold accent — it inherits the white wordmark.
+    expect(s.className).not.toContain("text-gold");
+  });
+
+  it("renders the Barbados island glyph in gold", () => {
+    // showIcon=false removes the trident tile so the island is the only mark-mask.
+    const { container } = render(<Logo showIcon={false} />);
+    const marks = container.querySelectorAll(".mark-mask");
+    expect(marks).toHaveLength(1);
+    expect(marks[0].className).toContain("text-gold");
   });
 
   it("exposes an accessible brand name", () => {
