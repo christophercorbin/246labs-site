@@ -6,7 +6,7 @@ export function ServiceCard({ group }: { group: ServiceGroup }) {
       <h3 className="font-sans text-xl font-bold text-flag-blue">
         {group.title}
       </h3>
-      <p className="mt-2 text-ink/80">{group.blurb}</p>
+      <p className="mt-2 text-ink/80">{group.description}</p>
       <ul className="mt-4 space-y-1">
         {group.items.map((item) => (
           <li
@@ -14,6 +14,19 @@ export function ServiceCard({ group }: { group: ServiceGroup }) {
             className="font-mono text-xs uppercase tracking-label text-muted"
           >
             {item}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-5 font-mono text-xs uppercase tracking-label text-muted">
+        You get
+      </p>
+      <ul className="mt-2 space-y-1 text-sm text-ink/80">
+        {group.deliverables.map((d) => (
+          <li key={d} className="flex gap-2">
+            <span aria-hidden className="text-flag-blue">
+              →
+            </span>
+            {d}
           </li>
         ))}
       </ul>

@@ -1,7 +1,7 @@
 export const metadata = {
   title: "About — 246Labs",
   description:
-    "246Labs is a Caribbean cloud-engineering studio. Precise about the work, proud of the place.",
+    "Why 246Labs exists: world-class cloud and AI engineering, built in the Caribbean and delivered anywhere.",
   alternates: { canonical: "/about" },
 };
 
@@ -16,14 +16,57 @@ export default function About() {
       </h1>
       <div className="mt-8 space-y-6 text-lg text-ink/80">
         <p>
-          246Labs builds and runs cloud and AI systems for teams that need the
-          work done right the first time. We are engineers first — precise
-          about the work, proud of the place.
+          246Labs is a Caribbean cloud and AI studio. We build the software, run
+          the infrastructure, and keep it secure — to the same standard as a firm
+          in San Francisco or London, engineered from Barbados.
+        </p>
+        <p>
+          It exists for a simple reason: serious engineering shouldn&apos;t have
+          to leave the region to be world-class. Too much Caribbean talent gets
+          exported — the work, and the people who do it. 246Labs is the bet that
+          it can be built here instead, and stand up to anyone, anywhere.
+        </p>
+        <p>
+          It&apos;s led by{" "}
+          <strong className="text-ink">Christopher Corbin</strong>, Founder &amp;
+          Principal Engineer — the person doing the work, not just running the
+          business. New company, high standard, no shortcuts.
+        </p>
+        <p>
+          The standard isn&apos;t a promise; it&apos;s already running.{" "}
+          <a
+            className="text-flag-blue underline"
+            href="https://sumdeting.246labs.cloud"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            SumDeTing
+          </a>{" "}
+          is an AI math tutor for Caribbean students built on Claude and Amazon
+          Bedrock;{" "}
+          <a
+            className="text-flag-blue underline"
+            href="https://bimweather.246labs.cloud"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Bim Weather
+          </a>{" "}
+          tracks storms across Barbados in real time; and{" "}
+          <a
+            className="text-flag-blue underline"
+            href="https://cargolinkbarbados.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CargoLink Barbados
+          </a>{" "}
+          moves cargo smarter. Same stack we&apos;d build yours on.
         </p>
         <p>
           The broken trident in our mark is Barbados&apos; own. It stands for
-          independence and for building things that last. That is the standard
-          we hold our infrastructure to.
+          independence and for building things that last. That is the standard we
+          hold our infrastructure to.
         </p>
       </div>
       <div className="mt-10 flex flex-wrap items-center gap-4">

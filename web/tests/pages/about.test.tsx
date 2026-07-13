@@ -3,9 +3,19 @@ import { describe, it, expect } from "vitest";
 import About from "@/app/about/page";
 
 describe("About page", () => {
-  it("renders the AWS Partner badge and descriptor line", () => {
+  it("keeps the Built on AWS badge and descriptor line", () => {
     render(<About />);
     expect(screen.getByText(/Built on AWS/i)).toBeInTheDocument();
-    expect(screen.getByText(/CONSULTING · DEVOPS · WEB APPS · HOSTING/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/CONSULTING · DEVOPS · WEB APPS · HOSTING/i),
+    ).toBeInTheDocument();
+  });
+
+  it("names the founder and points to real work as proof", () => {
+    render(<About />);
+    expect(screen.getByText(/Christopher Corbin/)).toBeInTheDocument();
+    expect(screen.getByText(/Founder & Principal Engineer/i)).toBeInTheDocument();
+    const sumdeting = screen.getByRole("link", { name: /SumDeTing/i });
+    expect(sumdeting).toHaveAttribute("href", "https://sumdeting.246labs.cloud");
   });
 });
