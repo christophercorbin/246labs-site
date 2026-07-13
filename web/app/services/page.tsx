@@ -10,24 +10,32 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <p className="font-mono text-xs uppercase tracking-label text-muted">
-        What we do
-      </p>
-      <h1 className="mt-2 font-sans text-4xl font-bold tracking-wordmark text-flag-blue">
-        Services
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-ink/80">
-        We design, build, run, and secure cloud and AI systems — the same rigor
-        you&apos;d expect from a firm in San Francisco or London, engineered from
-        Barbados. Pick a lane or hand us the whole thing, as a scoped project or
-        an ongoing retainer.
-      </p>
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {SERVICE_GROUPS.map((group) => (
-          <ServiceCard key={group.key} group={group} />
-        ))}
-      </div>
-    </section>
+    <>
+      <section className="bg-paper">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <p className="font-mono text-xs uppercase tracking-label text-muted">
+            What we do
+          </p>
+          <h1 className="mt-2 font-sans text-4xl font-bold tracking-wordmark text-flag-blue sm:text-5xl">
+            Services
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-ink/80">
+            We design, build, run, and secure cloud and AI systems — the same
+            rigor you&apos;d expect from a firm in San Francisco or London,
+            engineered from Barbados. Pick a lane or hand us the whole thing, as
+            a scoped project or an ongoing retainer.
+          </p>
+        </div>
+      </section>
+      <section className="reveal bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_GROUPS.map((group) => (
+              <ServiceCard key={group.key} group={group} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
