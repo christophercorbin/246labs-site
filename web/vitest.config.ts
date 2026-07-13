@@ -10,6 +10,10 @@ export default defineConfig({
         "./tests/mocks/next-font-google.ts",
         import.meta.url,
       ).pathname,
+      "next/script": new URL(
+        "./tests/mocks/next-script.tsx",
+        import.meta.url,
+      ).pathname,
     },
   },
   test: {

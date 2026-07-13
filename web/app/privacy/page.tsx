@@ -25,9 +25,12 @@ export default function Privacy() {
           data, and we don&apos;t add you to a mailing list.
         </p>
         <p>
-          This site sets no analytics or advertising cookies. Our hosting
-          provider (AWS Amplify/CloudFront) keeps standard server logs — IP
-          address, user agent, request time — for security and operations.
+          We use <strong className="text-ink">Matomo</strong> for analytics —
+          self-hosted on our own AWS, cookieless, and never shared with a
+          third party. No advertising cookies, no cross-site tracking; we
+          respect your browser&apos;s Do Not Track. Our hosting provider (AWS
+          Amplify/CloudFront) also keeps standard server logs — IP address,
+          user agent, request time — for security and operations.
         </p>
         <p>
           Want your messages deleted? Email{" "}
