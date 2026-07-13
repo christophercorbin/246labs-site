@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { describe, it, expect } from "vitest";
 import { SELECTED_WORK } from "@/lib/work";
 
@@ -14,5 +16,14 @@ describe("SELECTED_WORK", () => {
     const sumdeting = SELECTED_WORK[0];
     expect(sumdeting.href).toBe("https://sumdeting.246labs.cloud");
     expect(sumdeting.blurb).toMatch(/Bedrock|Claude/);
+  });
+
+  it("each product has a committed .webp screenshot that exists on disk", () => {
+    for (const w of SELECTED_WORK) {
+      expect(w.image).toMatch(/^\/work\/.+\.webp$/);
+      // The file the data points at must actually be present in public/.
+      const file = path.join(process.cwd(), "public", w.image!);
+      expect(existsSync(file), `${w.image} missing in public/`).toBe(true);
+    }
   });
 });
