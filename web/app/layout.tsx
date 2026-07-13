@@ -3,6 +3,7 @@ import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${plexMono.variable}`}>
       <body className="font-sans antialiased">
+        <JsonLd />
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
