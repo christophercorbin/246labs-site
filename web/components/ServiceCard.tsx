@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
+import Link from "next/link";
 import {
   Sparkles,
   Code,
@@ -23,7 +24,11 @@ const ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 export function ServiceCard({ group }: { group: ServiceGroup }) {
   const Icon = ICONS[group.key] ?? Sparkles;
   return (
-    <div className="card card-accent border border-hairline bg-white p-6">
+    <Link
+      href={`/services/${group.key}`}
+      aria-label={`Explore ${group.title}`}
+      className="card card-accent group block border border-hairline bg-white p-6"
+    >
       <Icon aria-hidden className="h-7 w-7 text-gold" strokeWidth={1.75} />
       <h3 className="mt-3 font-sans text-xl font-bold text-flag-blue">
         {group.title}
@@ -52,6 +57,9 @@ export function ServiceCard({ group }: { group: ServiceGroup }) {
           </li>
         ))}
       </ul>
-    </div>
+      <span className="mt-5 block font-mono text-xs uppercase tracking-label text-muted group-hover:text-gold">
+        Explore {group.title} →
+      </span>
+    </Link>
   );
 }

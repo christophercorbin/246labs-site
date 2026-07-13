@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-export function ContactForm() {
+export function ContactForm({ defaultMessage }: { defaultMessage?: string } = {}) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>("idle");
 
@@ -90,6 +90,7 @@ export function ContactForm() {
           id="message"
           name="message"
           rows={5}
+          defaultValue={defaultMessage}
           className="mt-1 w-full rounded-tile-sm border border-hairline bg-white p-3 text-ink"
         />
         {errors.message && (

@@ -5,15 +5,20 @@ import robots from "@/app/robots";
 import { JsonLd } from "@/components/JsonLd";
 
 describe("sitemap", () => {
-  it("lists the five routes on the canonical host", () => {
-    const entries = sitemap();
-    const urls = entries.map((e) => e.url);
+  it("lists the static routes and every service detail page on the canonical host", () => {
+    const urls = sitemap().map((e) => e.url);
     expect(urls).toEqual([
       "https://246labs.cloud",
       "https://246labs.cloud/services",
       "https://246labs.cloud/about",
       "https://246labs.cloud/contact",
       "https://246labs.cloud/privacy",
+      "https://246labs.cloud/services/ai",
+      "https://246labs.cloud/services/build",
+      "https://246labs.cloud/services/run",
+      "https://246labs.cloud/services/cloud",
+      "https://246labs.cloud/services/assurance",
+      "https://246labs.cloud/services/hardware",
     ]);
   });
 });
