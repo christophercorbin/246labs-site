@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
 export function Footer() {
@@ -8,8 +9,11 @@ export function Footer() {
         <div className="font-mono text-xs uppercase tracking-label text-faint">
           CONSULTING · DEVOPS · WEB APPS · HOSTING
         </div>
-        <div className="font-mono text-xs text-faint">
-          246labs.cloud · hello@246labs.cloud
+        <div className="flex items-center gap-4 font-mono text-xs text-faint">
+          <span>246labs.cloud · hello@246labs.cloud</span>
+          <Link href="/privacy" className="underline hover:text-gold">
+            Privacy
+          </Link>
         </div>
       </div>
     </footer>

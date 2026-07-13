@@ -1,13 +1,21 @@
+import type { Metadata } from "next";
 import { BootAnimation } from "@/components/BootAnimation";
 import { Button } from "@/components/Button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { SERVICE_GROUPS } from "@/lib/services";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
     <>
       <section className="bg-navy">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-28">
+          <h1 className="sr-only">
+            Cloud infrastructure, built in the Caribbean.
+          </h1>
           <BootAnimation />
           <p className="max-w-2xl text-xl text-white/80">
             246Labs is a Caribbean cloud-engineering studio. We build the

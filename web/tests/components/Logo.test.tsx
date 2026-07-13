@@ -13,4 +13,13 @@ describe("Logo", () => {
     render(<Logo />);
     expect(screen.getByRole("img", { name: /246labs/i })).toBeInTheDocument();
   });
+
+  it("adds boot animation classes only when animated", () => {
+    const { container, rerender } = render(<Logo animated />);
+    expect(container.querySelector(".boot-trident")).not.toBeNull();
+    expect(container.querySelector(".boot-cursor")).not.toBeNull();
+    expect(container.querySelector(".boot-wordmark")).not.toBeNull();
+    rerender(<Logo />);
+    expect(container.querySelector(".boot-trident")).toBeNull();
+  });
 });

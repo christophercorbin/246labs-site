@@ -5,6 +5,7 @@ export const metadata = {
   title: "Services — 246Labs",
   description:
     "AI, build, run, cloud & DevOps, assurance, and hardware — everything 246Labs offers.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

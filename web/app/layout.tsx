@@ -3,6 +3,7 @@ import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -20,6 +21,15 @@ export const metadata: Metadata = {
   description:
     "246Labs is a Caribbean cloud-engineering studio: AI, web & app development, AWS, DevOps, hosting, and security audits.",
   metadataBase: new URL("https://246labs.cloud"),
+  openGraph: {
+    siteName: "246Labs",
+    type: "website",
+    locale: "en_US",
+    url: "https://246labs.cloud",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${plexMono.variable}`}>
       <body className="font-sans antialiased">
+        <JsonLd />
         <Nav />
         <main className="min-h-screen">{children}</main>
         <Footer />
