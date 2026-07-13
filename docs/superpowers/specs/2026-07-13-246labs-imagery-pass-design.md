@@ -63,7 +63,7 @@ the gradient fallback. Each real screenshot is then a one-line data edit.
 
 ## Component 2 — Service icons
 
-**Dependency:** add `lucide-react` (MIT, tree-shakeable — only the icons
+**Dependency:** add `lucide-react` (ISC, tree-shakeable — only the icons
 imported ship). This is the site's first icon dependency; justified by giving
 six consistent, professionally-drawn line icons without hand-authoring SVGs.
 
