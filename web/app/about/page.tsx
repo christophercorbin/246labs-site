@@ -28,7 +28,7 @@ export default function About() {
       </div>
       <div className="mt-10 flex flex-wrap items-center gap-4">
         <span className="rounded-tile-sm border border-hairline px-4 py-2 font-mono text-xs uppercase tracking-label text-muted">
-          AWS Partner
+          Built on AWS
         </span>
         <span className="font-mono text-xs uppercase tracking-label text-muted">
           CONSULTING · DEVOPS · WEB APPS · HOSTING

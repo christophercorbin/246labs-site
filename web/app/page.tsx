@@ -13,6 +13,9 @@ export default function Home() {
     <>
       <section className="bg-navy">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-28">
+          <h1 className="sr-only">
+            Cloud infrastructure, built in the Caribbean.
+          </h1>
           <BootAnimation />
           <p className="max-w-2xl text-xl text-white/80">
             246Labs is a Caribbean cloud-engineering studio. We build the

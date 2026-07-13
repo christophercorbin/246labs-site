@@ -2,7 +2,8 @@ import { ContactForm } from "@/components/ContactForm";
 
 export const metadata = {
   title: "Contact — 246Labs",
-  description: "Start a project with 246Labs.",
+  description:
+    "Start a project with 246Labs — cloud, AI, and DevOps engineering from Barbados. We reply within 1 business day.",
   alternates: { canonical: "/contact" },
 };
 
@@ -21,6 +22,10 @@ export default function ContactPage() {
           hello@246labs.cloud
         </a>
         .
+      </p>
+      <p className="mt-2 font-mono text-xs uppercase tracking-label text-muted">
+        Based in Barbados · Working across the Caribbean and beyond · We reply
+        within 1 business day
       </p>
       <div className="mt-10">
         <ContactForm />
