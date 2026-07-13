@@ -16,7 +16,10 @@ describe("ServiceCard", () => {
     expect(screen.getByRole("heading", { name: ai.title })).toBeInTheDocument();
     expect(screen.getByText(ai.items[0])).toBeInTheDocument();
     expect(screen.getByText(ai.deliverables[0])).toBeInTheDocument();
-    expect(screen.getByRole("link")).toHaveAttribute("href", "/services/ai");
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", "/services/ai");
+    // Concise accessible name for screen readers (not the whole card's text).
+    expect(link).toHaveAttribute("aria-label", "Explore AI");
   });
 
   it("maps every service group key to an icon", () => {

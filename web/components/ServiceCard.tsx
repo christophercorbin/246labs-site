@@ -26,6 +26,7 @@ export function ServiceCard({ group }: { group: ServiceGroup }) {
   return (
     <Link
       href={`/services/${group.key}`}
+      aria-label={`Explore ${group.title}`}
       className="card card-accent group block border border-hairline bg-white p-6"
     >
       <Icon aria-hidden className="h-7 w-7 text-gold" strokeWidth={1.75} />
