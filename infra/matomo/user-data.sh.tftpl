@@ -31,15 +31,15 @@ mkdir -p /srv/matomo/{db,matomo,caddy_data,secrets}
 # openssl (no pipe) avoids the `tr </dev/urandom | head` SIGPIPE that aborts
 # under `set -o pipefail`. 20 bytes -> 40 hex chars (160 bits).
 gen() { openssl rand -hex 20; }
-if [ ! -f /srv/matomo/secrets/db_password ]; then
-  gen > /srv/matomo/secrets/db_password
-  gen > /srv/matomo/secrets/db_root_password
-  chmod 600 /srv/matomo/secrets/*
-  aws ssm put-parameter --region ${region} --name /matomo/db_password --type SecureString \
-    --value "$(cat /srv/matomo/secrets/db_password)" --overwrite || true
-  aws ssm put-parameter --region ${region} --name /matomo/db_root_password --type SecureString \
-    --value "$(cat /srv/matomo/secrets/db_root_password)" --overwrite || true
-fi
+# Per-file, idempotent: `-s` = exists AND non-empty. Robust to partial state on
+# a reused data volume (an earlier crash may have left one secret written).
+[ -s /srv/matomo/secrets/db_password ] || gen > /srv/matomo/secrets/db_password
+[ -s /srv/matomo/secrets/db_root_password ] || gen > /srv/matomo/secrets/db_root_password
+chmod 600 /srv/matomo/secrets/*
+aws ssm put-parameter --region ${region} --name /matomo/db_password --type SecureString \
+  --value "$(cat /srv/matomo/secrets/db_password)" --overwrite || true
+aws ssm put-parameter --region ${region} --name /matomo/db_root_password --type SecureString \
+  --value "$(cat /srv/matomo/secrets/db_root_password)" --overwrite || true
 
 # Stack files (compose + Caddyfile fetched from instance metadata is not available;
 # they are written here from the committed copies baked into user-data at apply time).
