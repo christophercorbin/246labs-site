@@ -6,15 +6,27 @@ export function WorkCard({ work }: { work: Work }) {
       href={work.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col rounded-tile border border-hairline bg-white p-6 transition hover:border-flag-blue"
+      className="card group flex flex-col overflow-hidden border border-hairline bg-white"
     >
-      <h3 className="font-sans text-xl font-bold text-flag-blue">
-        {work.name}
-      </h3>
-      <p className="mt-2 flex-1 text-ink/80">{work.blurb}</p>
-      <span className="mt-4 font-mono text-xs uppercase tracking-label text-muted group-hover:text-flag-blue">
-        Visit ↗
-      </span>
+      {/* Thumbnail zone — brand gradient placeholder; a real screenshot later
+          drops into this same 16:9 box (add an <img> with object-cover). */}
+      <div
+        data-work-thumb
+        className="flex aspect-video items-center justify-center bg-gradient-to-br from-navy to-flag-blue"
+      >
+        <span className="font-sans text-lg font-bold tracking-wordmark text-white/90">
+          {work.name}
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-sans text-xl font-bold text-flag-blue">
+          {work.name}
+        </h3>
+        <p className="mt-2 flex-1 text-ink/80">{work.blurb}</p>
+        <span className="mt-4 font-mono text-xs uppercase tracking-label text-muted group-hover:text-gold">
+          Visit ↗
+        </span>
+      </div>
     </a>
   );
 }
