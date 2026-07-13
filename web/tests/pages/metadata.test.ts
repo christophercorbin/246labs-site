@@ -15,6 +15,10 @@ describe("page metadata", () => {
 
   it("root declares openGraph and twitter card", () => {
     expect(root.openGraph?.siteName).toBe("246Labs");
-    expect(root.twitter?.card).toBe("summary_large_image");
+    // Next's Twitter metadata type is a union; narrow before reading `card`.
+    const twitter = root.twitter;
+    expect(twitter && "card" in twitter ? twitter.card : undefined).toBe(
+      "summary_large_image",
+    );
   });
 });
