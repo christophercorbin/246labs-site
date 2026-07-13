@@ -10,4 +10,9 @@ describe("BootAnimation", () => {
       screen.getByText(/built in the Caribbean/i),
     ).toBeInTheDocument();
   });
+
+  it("renders the animated logo variant", () => {
+    const { container } = render(<BootAnimation />);
+    expect(container.querySelector(".boot-wordmark")).not.toBeNull();
+  });
 });
