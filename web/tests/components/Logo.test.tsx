@@ -21,5 +21,7 @@ describe("Logo", () => {
     expect(container.querySelector(".boot-wordmark")).not.toBeNull();
     rerender(<Logo />);
     expect(container.querySelector(".boot-trident")).toBeNull();
+    expect(container.querySelector(".boot-cursor")).toBeNull();
+    expect(container.querySelector(".boot-wordmark")).toBeNull();
   });
 });
