@@ -55,4 +55,9 @@ describe("ContactForm", () => {
       screen.queryByText(/thanks|got it|we.ll be in touch/i),
     ).not.toBeInTheDocument();
   });
+
+  it("seeds the message textarea when defaultMessage is provided", () => {
+    render(<ContactForm defaultMessage={"I'm interested in: AI\n\n"} />);
+    expect(screen.getByLabelText(/message/i)).toHaveValue("I'm interested in: AI\n\n");
+  });
 });

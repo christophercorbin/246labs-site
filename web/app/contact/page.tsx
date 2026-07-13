@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
+import { SERVICE_GROUPS } from "@/lib/services";
 
 export const metadata = {
   title: "Contact — 246Labs",
@@ -7,7 +8,19 @@ export const metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string }>;
+}) {
+  const { service } = await searchParams;
+  const group = service
+    ? SERVICE_GROUPS.find((g) => g.key === service)
+    : undefined;
+  const defaultMessage = group
+    ? `I'm interested in: ${group.title}\n\n`
+    : undefined;
+
   return (
     <section className="mx-auto max-w-2xl px-6 py-20">
       <p className="font-mono text-xs uppercase tracking-label text-muted">
@@ -28,7 +41,7 @@ export default function ContactPage() {
         within 1 business day
       </p>
       <div className="mt-10">
-        <ContactForm />
+        <ContactForm defaultMessage={defaultMessage} />
       </div>
     </section>
   );
