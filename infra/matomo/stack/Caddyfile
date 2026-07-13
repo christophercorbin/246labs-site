@@ -1,0 +1,4 @@
+{$MATOMO_HOSTNAME} {
+	reverse_proxy matomo:80
+	encode gzip
+}

@@ -8,7 +8,7 @@ describe("privacy page", () => {
     render(<Privacy />);
     expect(screen.getByRole("heading", { level: 1, name: /privacy/i })).toBeInTheDocument();
     expect(screen.getByText(/name, email address, company/i)).toBeInTheDocument();
-    expect(screen.getByText(/no analytics or advertising cookies/i)).toBeInTheDocument();
+    expect(screen.getByText(/self-hosted on our own AWS, cookieless/i)).toBeInTheDocument();
   });
 });
 

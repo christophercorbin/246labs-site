@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+
+dnf update -y
+dnf install -y docker
+systemctl enable --now docker
+# docker compose plugin
+mkdir -p /usr/local/lib/docker/cli-plugins
+curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-aarch64" \
+  -o /usr/local/lib/docker/cli-plugins/docker-compose
+chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+# Mount the data EBS volume (find the non-root NVMe device with no filesystem).
+DATA_DEV=""
+for d in /dev/nvme*n1; do
+  [ "$d" = "$(findmnt -n -o SOURCE / | sed 's/p[0-9]*$//')" ] && continue
+  if ! blkid "$d" >/dev/null 2>&1; then DATA_DEV="$d"; break; fi
+  # already-formatted data disk (reattach case)
+  if blkid "$d" | grep -q 'TYPE="xfs"'; then DATA_DEV="$d"; break; fi
+done
+if [ -n "$DATA_DEV" ]; then
+  blkid "$DATA_DEV" >/dev/null 2>&1 || mkfs.xfs "$DATA_DEV"
+  mkdir -p /srv/matomo
+  echo "$DATA_DEV /srv/matomo xfs defaults,nofail 0 2" >> /etc/fstab
+  mount -a
+fi
+
+mkdir -p /srv/matomo/{db,matomo,caddy_data,secrets}
+
+# Generate DB secrets once; persist to SSM SecureString for recovery.
+# openssl (no pipe) avoids the `tr </dev/urandom | head` SIGPIPE that aborts
+# under `set -o pipefail`. 20 bytes -> 40 hex chars (160 bits).
+gen() { openssl rand -hex 20; }
+# Per-file, idempotent: `-s` = exists AND non-empty. Robust to partial state on
+# a reused data volume (an earlier crash may have left one secret written).
+[ -s /srv/matomo/secrets/db_password ] || gen > /srv/matomo/secrets/db_password
+[ -s /srv/matomo/secrets/db_root_password ] || gen > /srv/matomo/secrets/db_root_password
+chmod 600 /srv/matomo/secrets/*
+aws ssm put-parameter --region ${region} --name /matomo/db_password --type SecureString \
+  --value "$(cat /srv/matomo/secrets/db_password)" --overwrite || true
+aws ssm put-parameter --region ${region} --name /matomo/db_root_password --type SecureString \
+  --value "$(cat /srv/matomo/secrets/db_root_password)" --overwrite || true
+
+# Stack files (compose + Caddyfile fetched from instance metadata is not available;
+# they are written here from the committed copies baked into user-data at apply time).
+cat > /srv/matomo/docker-compose.yml <<'COMPOSE'
+${compose_yml}
+COMPOSE
+cat > /srv/matomo/Caddyfile <<'CADDY'
+${caddyfile}
+CADDY
+cat > /srv/matomo/backup.sh <<'BACKUP'
+${backup_sh}
+BACKUP
+chmod +x /srv/matomo/backup.sh
+
+export MATOMO_HOSTNAME="${hostname}"
+echo "MATOMO_HOSTNAME=${hostname}" > /srv/matomo/.env
+cd /srv/matomo
+MATOMO_HOSTNAME="${hostname}" docker compose --env-file /srv/matomo/.env up -d
+
+# Nightly backup at 04:30 UTC via systemd timer.
+cat > /etc/systemd/system/matomo-backup.service <<UNIT
+[Service]
+Type=oneshot
+Environment=BACKUP_BUCKET=${backup_bucket}
+ExecStart=/srv/matomo/backup.sh
+UNIT
+cat > /etc/systemd/system/matomo-backup.timer <<UNIT
+[Timer]
+OnCalendar=*-*-* 04:30:00 UTC
+Persistent=true
+[Install]
+WantedBy=timers.target
+UNIT
+systemctl daemon-reload
+systemctl enable --now matomo-backup.timer
+
+dnf install -y dnf-automatic
+systemctl enable --now dnf-automatic.timer
