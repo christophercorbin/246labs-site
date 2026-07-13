@@ -5,7 +5,7 @@ import robots from "@/app/robots";
 import { JsonLd } from "@/components/JsonLd";
 
 describe("sitemap", () => {
-  it("lists the four routes on the canonical host", () => {
+  it("lists the five routes on the canonical host", () => {
     const entries = sitemap();
     const urls = entries.map((e) => e.url);
     expect(urls).toEqual([
@@ -13,6 +13,7 @@ describe("sitemap", () => {
       "https://246labs.cloud/services",
       "https://246labs.cloud/about",
       "https://246labs.cloud/contact",
+      "https://246labs.cloud/privacy",
     ]);
   });
 });
