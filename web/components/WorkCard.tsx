@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Work } from "@/lib/work";
 
 export function WorkCard({ work }: { work: Work }) {
@@ -8,15 +9,26 @@ export function WorkCard({ work }: { work: Work }) {
       rel="noopener noreferrer"
       className="card group flex flex-col overflow-hidden border border-hairline bg-white"
     >
-      {/* Thumbnail zone — brand gradient placeholder; a real screenshot later
-          drops into this same 16:9 box (add an <img> with object-cover). */}
+      {/* Thumbnail zone — a real screenshot (16:9) when `image` is set,
+          otherwise the brand-gradient placeholder with the product name. */}
       <div
         data-work-thumb
-        className="flex aspect-video items-center justify-center bg-gradient-to-br from-navy to-flag-blue"
+        className="relative flex aspect-video items-center justify-center bg-gradient-to-br from-navy to-flag-blue"
       >
-        <span className="font-sans text-lg font-bold tracking-wordmark text-white/90">
-          {work.name}
-        </span>
+        {work.image ? (
+          <Image
+            src={work.image}
+            alt={`${work.name} screenshot`}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <span className="font-sans text-lg font-bold tracking-wordmark text-white/90">
+            {work.name}
+          </span>
+        )}
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-sans text-xl font-bold text-flag-blue">
