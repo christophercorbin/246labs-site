@@ -7,7 +7,11 @@ export const contentType = "image/png";
 export const alt = "246Labs — Cloud infrastructure, built in the Caribbean.";
 
 async function asset(rel: string) {
-  return readFile(path.join(process.cwd(), rel));
+  try {
+    return await readFile(path.join(process.cwd(), rel));
+  } catch {
+    throw new Error(`opengraph-image: missing asset ${rel}`);
+  }
 }
 
 export default async function OgImage() {
