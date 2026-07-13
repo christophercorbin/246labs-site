@@ -22,7 +22,20 @@ export default async function Icon() {
           borderRadius: 7,
         }}
       >
-        <div style={{ height: 8, background: "#0A2E7A" }} />
+        <div
+          style={{
+            height: 9,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            paddingLeft: 3,
+            background: "#0A2E7A",
+          }}
+        >
+          <div style={{ width: 3, height: 3, borderRadius: 2, background: "#FF5F56" }} />
+          <div style={{ width: 3, height: 3, borderRadius: 2, background: "#FFBD2E" }} />
+          <div style={{ width: 3, height: 3, borderRadius: 2, background: "#27C93F" }} />
+        </div>
         <div
           style={{
             flex: 1,

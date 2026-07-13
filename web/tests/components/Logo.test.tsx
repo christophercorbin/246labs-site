@@ -24,4 +24,11 @@ describe("Logo", () => {
     expect(container.querySelector(".boot-cursor")).toBeNull();
     expect(container.querySelector(".boot-wordmark")).toBeNull();
   });
+
+  it("no longer renders traffic dots (moved to the favicon)", () => {
+    const { container } = render(<Logo />);
+    expect(container.querySelector(".bg-traffic-red")).toBeNull();
+    expect(container.querySelector(".bg-traffic-amber")).toBeNull();
+    expect(container.querySelector(".bg-traffic-green")).toBeNull();
+  });
 });

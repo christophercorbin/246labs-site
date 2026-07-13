@@ -25,11 +25,7 @@ export function Logo({
           aria-hidden
           className={`relative inline-flex h-[52px] w-[52px] flex-col overflow-hidden rounded-tile-sm bg-navy ${animated ? "boot-tile" : ""}`}
         >
-          <span className="flex h-[13px] items-center gap-[3px] bg-panel-blue px-[5px]">
-            <span className="h-[4px] w-[4px] rounded-full bg-traffic-red" />
-            <span className="h-[4px] w-[4px] rounded-full bg-traffic-amber" />
-            <span className="h-[4px] w-[4px] rounded-full bg-traffic-green" />
-          </span>
+          <span className="h-[13px] bg-panel-blue" />
           <span className="flex flex-1 items-center justify-center gap-[3px]">
             <span className={`inline-flex w-[24px] ${animated ? "boot-trident" : ""}`}>
               <span
