@@ -1,9 +1,31 @@
+import type { ComponentType, SVGProps } from "react";
+import {
+  Sparkles,
+  Code,
+  Server,
+  Cloud,
+  ShieldCheck,
+  Cpu,
+} from "lucide-react";
 import type { ServiceGroup } from "@/lib/services";
 
+// key -> icon. Falls back to Sparkles if a new group key is ever added
+// without a mapping (keeps the grid rendering rather than crashing).
+const ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  ai: Sparkles,
+  build: Code,
+  run: Server,
+  cloud: Cloud,
+  assurance: ShieldCheck,
+  hardware: Cpu,
+};
+
 export function ServiceCard({ group }: { group: ServiceGroup }) {
+  const Icon = ICONS[group.key] ?? Sparkles;
   return (
     <div className="card card-accent border border-hairline bg-white p-6">
-      <h3 className="font-sans text-xl font-bold text-flag-blue">
+      <Icon aria-hidden className="h-7 w-7 text-gold" strokeWidth={1.75} />
+      <h3 className="mt-3 font-sans text-xl font-bold text-flag-blue">
         {group.title}
       </h3>
       <p className="mt-2 text-ink/80">{group.description}</p>

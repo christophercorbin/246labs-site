@@ -2,6 +2,7 @@ export type Work = {
   name: string;
   blurb: string;
   href: string;
+  image?: string; // e.g. "/work/sumdeting.webp"; omit until the file is committed
 };
 
 export const SELECTED_WORK: Work[] = [

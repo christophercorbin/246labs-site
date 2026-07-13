@@ -16,7 +16,26 @@ describe("WorkCard", () => {
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
     expect(screen.getByText("An AI math tutor.")).toBeInTheDocument();
-    // Thumbnail zone present (data-attr marks the image-ready block).
-    expect(container.querySelector('[data-work-thumb]')).not.toBeNull();
+    expect(container.querySelector("[data-work-thumb]")).not.toBeNull();
+  });
+
+  it("shows the gradient placeholder (no <img>) when no image is set", () => {
+    const { container } = render(<WorkCard work={work} />);
+    const thumb = container.querySelector("[data-work-thumb]")!;
+    expect(thumb.querySelector("img")).toBeNull();
+    // Product name shown as the placeholder label inside the thumb.
+    expect(thumb.textContent).toContain("SumDeTing");
+  });
+
+  it("renders a screenshot image with alt text when image is set", () => {
+    const { container } = render(
+      <WorkCard work={{ ...work, image: "/work/sumdeting.webp" }} />,
+    );
+    const thumb = container.querySelector("[data-work-thumb]")!;
+    const img = thumb.querySelector("img");
+    expect(img).not.toBeNull();
+    expect(img).toHaveAttribute("alt", "SumDeTing screenshot");
+    // Fill layout requires a positioned container.
+    expect(thumb.className).toContain("relative");
   });
 });
