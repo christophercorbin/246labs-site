@@ -3,25 +3,20 @@ import { describe, it, expect } from "vitest";
 import Home from "@/app/page";
 
 describe("Home page", () => {
-  it("shows the tagline and a contact CTA", () => {
+  it("shows a visible display h1 and a contact CTA", () => {
     render(<Home />);
     expect(
-      screen.getAllByText("Cloud infrastructure, built in the Caribbean.")[0],
+      screen.getByRole("heading", { level: 1, name: /build, run, and secure/i }),
     ).toBeInTheDocument();
-    // Two "Start a project" links now (hero + closing band); take the first.
     const cta = screen.getAllByRole("link", { name: /start a project/i })[0];
     expect(cta).toHaveAttribute("href", "/contact");
   });
 
-  it("has an h1 for the page", () => {
+  it("keeps the brand tagline and the two pillars", () => {
     render(<Home />);
     expect(
-      screen.getByRole("heading", { level: 1, name: /cloud infrastructure/i }),
+      screen.getAllByText("Cloud infrastructure, built in the Caribbean.")[0],
     ).toBeInTheDocument();
-  });
-
-  it("states the two pillars", () => {
-    render(<Home />);
     expect(screen.getByText(/the region competes/i)).toBeInTheDocument();
     expect(screen.getByText(/value stays home/i)).toBeInTheDocument();
   });

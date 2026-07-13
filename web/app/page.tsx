@@ -13,12 +13,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      {/* Hero (navy) */}
       <section className="bg-navy">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-28">
-          <h1 className="sr-only">
-            Cloud infrastructure, built in the Caribbean.
-          </h1>
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-28">
           <BootAnimation />
+          <h1 className="max-w-3xl font-sans text-4xl font-bold leading-tight tracking-wordmark text-white sm:text-5xl">
+            We build, run, and secure your cloud &amp; AI.
+          </h1>
           <p className="max-w-2xl text-xl text-white/80">
             246Labs is a Caribbean cloud and AI studio. We build the software,
             run the infrastructure, and keep it secure — the same rigor
@@ -36,55 +37,76 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <p className="font-mono text-xs uppercase tracking-label text-muted">
-          Why 246Labs
-        </p>
-        <div className="mt-6 grid gap-8 md:grid-cols-2">
-          <div>
-            <h2 className="font-sans text-2xl font-bold text-flag-blue">
-              The region competes.
-            </h2>
-            <p className="mt-2 text-ink/80">
-              Serious cloud and AI work doesn&apos;t have to be outsourced
-              abroad. We deliver it from here — to the same standard, for clients
-              anywhere.
-            </p>
+      {/* Why (paper) */}
+      <section className="reveal bg-paper">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <p className="font-mono text-xs uppercase tracking-label text-muted">
+            Why 246Labs
+          </p>
+          <div className="mt-6 grid gap-8 md:grid-cols-2">
+            <div>
+              <h2 className="font-sans text-2xl font-bold text-flag-blue">
+                The region competes.
+              </h2>
+              <p className="mt-2 text-ink/80">
+                Serious cloud and AI work doesn&apos;t have to be outsourced
+                abroad. We deliver it from here — to the same standard, for
+                clients anywhere.
+              </p>
+            </div>
+            <div>
+              <h2 className="font-sans text-2xl font-bold text-flag-blue">
+                Value stays home.
+              </h2>
+              <p className="mt-2 text-ink/80">
+                Every system we build keeps expertise and opportunity in the
+                Caribbean, instead of draining away with the talent that leaves.
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="font-sans text-2xl font-bold text-flag-blue">
-              Value stays home.
-            </h2>
-            <p className="mt-2 text-ink/80">
-              Every system we build keeps expertise and opportunity in the
-              Caribbean, instead of draining away with the talent that leaves.
-            </p>
+        </div>
+      </section>
+
+      {/* Services (white) */}
+      <section className="reveal bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <p className="font-mono text-xs uppercase tracking-label text-muted">
+            What we do
+          </p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_GROUPS.map((group) => (
+              <ServiceCard key={group.key} group={group} />
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-8">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {SERVICE_GROUPS.map((group) => (
-            <ServiceCard key={group.key} group={group} />
-          ))}
+      {/* Selected work (navy band, with trident watermark) */}
+      <section id="work" className="reveal relative overflow-hidden bg-navy">
+        <span
+          aria-hidden
+          className="mark-mask pointer-events-none absolute -right-16 top-1/2 h-[420px] w-[420px] -translate-y-1/2 text-white/5"
+          style={{
+            WebkitMaskImage: "url(/brand/trident-white.png)",
+            maskImage: "url(/brand/trident-white.png)",
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl px-6 py-20">
+          <p className="font-mono text-xs uppercase tracking-label text-gold">
+            Selected work
+          </p>
+          <h2 className="mt-2 font-sans text-3xl font-bold tracking-wordmark text-white">
+            Things we&apos;ve shipped.
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {SELECTED_WORK.map((work) => (
+              <WorkCard key={work.href} work={work} />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="work" className="mx-auto max-w-6xl px-6 py-20">
-        <p className="font-mono text-xs uppercase tracking-label text-muted">
-          Selected work
-        </p>
-        <h2 className="mt-2 font-sans text-3xl font-bold tracking-wordmark text-flag-blue">
-          Things we&apos;ve shipped.
-        </h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {SELECTED_WORK.map((work) => (
-            <WorkCard key={work.href} work={work} />
-          ))}
-        </div>
-      </section>
-
+      {/* Closing CTA (flag-blue) */}
       <section className="bg-flag-blue">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20">
           <h2 className="font-sans text-3xl font-bold tracking-wordmark text-white">
