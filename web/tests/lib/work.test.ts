@@ -26,4 +26,10 @@ describe("SELECTED_WORK", () => {
       expect(existsSync(file), `${w.image} missing in public/`).toBe(true);
     }
   });
+
+  it("gives each product a unique slug", () => {
+    const slugs = SELECTED_WORK.map((w) => w.slug);
+    expect(slugs).toEqual(["sumdeting", "bimweather", "cargolink"]);
+    expect(new Set(slugs).size).toBe(3);
+  });
 });

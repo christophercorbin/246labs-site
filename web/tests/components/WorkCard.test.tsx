@@ -6,6 +6,7 @@ const work = {
   name: "SumDeTing",
   blurb: "An AI math tutor.",
   href: "https://sumdeting.246labs.cloud",
+  slug: "sumdeting",
 };
 
 describe("WorkCard", () => {
