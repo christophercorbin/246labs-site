@@ -16,7 +16,7 @@ for d in /dev/nvme*n1; do
   [ "$d" = "$(findmnt -n -o SOURCE / | sed 's/p[0-9]*$//')" ] && continue
   if ! blkid "$d" >/dev/null 2>&1; then DATA_DEV="$d"; break; fi
   # already-formatted data disk (reattach case)
-  if blkid "$d" | grep -q 'TYPE="xfs"'; then DATA_DEV="$d"; fi
+  if blkid "$d" | grep -q 'TYPE="xfs"'; then DATA_DEV="$d"; break; fi
 done
 if [ -n "$DATA_DEV" ]; then
   blkid "$DATA_DEV" >/dev/null 2>&1 || mkfs.xfs "$DATA_DEV"

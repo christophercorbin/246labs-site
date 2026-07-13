@@ -30,6 +30,8 @@ services:
     image: caddy:2
     restart: unless-stopped
     ports: ["80:80", "443:443"]
+    environment:
+      MATOMO_HOSTNAME: ${MATOMO_HOSTNAME}
     volumes:
       - /srv/matomo/Caddyfile:/etc/caddy/Caddyfile:ro
       - /srv/matomo/caddy_data:/data

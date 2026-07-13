@@ -21,6 +21,7 @@ describe("Analytics", () => {
     expect(script).not.toBeNull();
     const js = script?.innerHTML ?? "";
     expect(js).toContain("disableCookies");
+    expect(js).toContain("setDoNotTrack");
     expect(js).toContain("analytics.246labs.cloud");
     expect(js).toContain("matomo.php");
   });
