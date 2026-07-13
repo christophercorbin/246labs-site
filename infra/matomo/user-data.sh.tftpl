@@ -28,7 +28,9 @@ fi
 mkdir -p /srv/matomo/{db,matomo,caddy_data,secrets}
 
 # Generate DB secrets once; persist to SSM SecureString for recovery.
-gen() { tr -dc 'A-Za-z0-9' </dev/urandom | head -c 40; }
+# openssl (no pipe) avoids the `tr </dev/urandom | head` SIGPIPE that aborts
+# under `set -o pipefail`. 20 bytes -> 40 hex chars (160 bits).
+gen() { openssl rand -hex 20; }
 if [ ! -f /srv/matomo/secrets/db_password ]; then
   gen > /srv/matomo/secrets/db_password
   gen > /srv/matomo/secrets/db_root_password
