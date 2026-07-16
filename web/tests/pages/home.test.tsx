@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import Home from "@/app/page";
 
@@ -22,15 +22,30 @@ describe("Home page", () => {
   });
 
   it("links selected work to their case-study pages", () => {
-    render(<Home />);
+    const { container } = render(<Home />);
+    const work = within(container.querySelector("#work") as HTMLElement);
     expect(
-      screen.getByRole("link", { name: /SumDeTing/i }),
+      work.getByRole("link", { name: /SumDeTing/i }),
     ).toHaveAttribute("href", "/work/sumdeting");
     expect(
-      screen.getByRole("link", { name: /Bim Weather/i }),
+      work.getByRole("link", { name: /Bim Weather/i }),
     ).toHaveAttribute("href", "/work/bimweather");
     expect(
-      screen.getByRole("link", { name: /CargoLink Barbados/i }),
+      work.getByRole("link", { name: /CargoLink Barbados/i }),
+    ).toHaveAttribute("href", "/work/cargolink");
+  });
+
+  it("shows an above-the-fold proof line linking to the case studies", () => {
+    const { container } = render(<Home />);
+    const proof = within(container.querySelector("[data-proof]") as HTMLElement);
+    expect(
+      proof.getByRole("link", { name: /SumDeTing/i }),
+    ).toHaveAttribute("href", "/work/sumdeting");
+    expect(
+      proof.getByRole("link", { name: /Bim Weather/i }),
+    ).toHaveAttribute("href", "/work/bimweather");
+    expect(
+      proof.getByRole("link", { name: /CargoLink/i }),
     ).toHaveAttribute("href", "/work/cargolink");
   });
 });
