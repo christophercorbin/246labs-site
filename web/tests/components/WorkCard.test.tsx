@@ -10,12 +10,11 @@ const work = {
 };
 
 describe("WorkCard", () => {
-  it("links out with the name, blurb, and a thumbnail zone", () => {
+  it("links internally to the case study with name, blurb, and a thumbnail zone", () => {
     const { container } = render(<WorkCard work={work} />);
     const link = screen.getByRole("link", { name: /SumDeTing/i });
-    expect(link).toHaveAttribute("href", "https://sumdeting.246labs.cloud");
-    expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    expect(link).toHaveAttribute("href", "/work/sumdeting");
+    expect(link).not.toHaveAttribute("target");
     expect(screen.getByText("An AI math tutor.")).toBeInTheDocument();
     expect(container.querySelector("[data-work-thumb]")).not.toBeNull();
   });
@@ -24,7 +23,6 @@ describe("WorkCard", () => {
     const { container } = render(<WorkCard work={work} />);
     const thumb = container.querySelector("[data-work-thumb]")!;
     expect(thumb.querySelector("img")).toBeNull();
-    // Product name shown as the placeholder label inside the thumb.
     expect(thumb.textContent).toContain("SumDeTing");
   });
 
@@ -36,7 +34,6 @@ describe("WorkCard", () => {
     const img = thumb.querySelector("img");
     expect(img).not.toBeNull();
     expect(img).toHaveAttribute("alt", "SumDeTing screenshot");
-    // Fill layout requires a positioned container.
     expect(thumb.className).toContain("relative");
   });
 });

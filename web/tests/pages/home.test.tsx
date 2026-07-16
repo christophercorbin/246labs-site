@@ -21,16 +21,16 @@ describe("Home page", () => {
     expect(screen.getByText(/value stays home/i)).toBeInTheDocument();
   });
 
-  it("shows the selected work with external links", () => {
+  it("links selected work to their case-study pages", () => {
     render(<Home />);
     expect(
       screen.getByRole("link", { name: /SumDeTing/i }),
-    ).toHaveAttribute("href", "https://sumdeting.246labs.cloud");
+    ).toHaveAttribute("href", "/work/sumdeting");
     expect(
       screen.getByRole("link", { name: /Bim Weather/i }),
-    ).toHaveAttribute("href", "https://bimweather.246labs.cloud");
+    ).toHaveAttribute("href", "/work/bimweather");
     expect(
       screen.getByRole("link", { name: /CargoLink Barbados/i }),
-    ).toHaveAttribute("href", "https://cargolinkbarbados.com");
+    ).toHaveAttribute("href", "/work/cargolink");
   });
 });
