@@ -32,4 +32,16 @@ describe("SELECTED_WORK", () => {
     expect(slugs).toEqual(["sumdeting", "bimweather", "cargolink"]);
     expect(new Set(slugs).size).toBe(3);
   });
+
+  it("gives each product narrative case-study content and valid related-service keys", () => {
+    const SERVICE_KEYS = ["ai", "build", "run", "cloud", "assurance", "hardware"];
+    for (const w of SELECTED_WORK) {
+      expect(w.problem && w.problem.length).toBeGreaterThan(0);
+      expect(w.approach && w.approach.length).toBeGreaterThan(0);
+      expect(w.stack && w.stack.length).toBeGreaterThan(0);
+      for (const key of w.relatedServices ?? []) {
+        expect(SERVICE_KEYS).toContain(key);
+      }
+    }
+  });
 });

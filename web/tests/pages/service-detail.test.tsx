@@ -17,7 +17,7 @@ describe("service detail page", () => {
     // real-product proof
     expect(screen.getByRole("link", { name: /SumDeTing/i })).toHaveAttribute(
       "href",
-      "https://sumdeting.246labs.cloud",
+      "/work/sumdeting",
     );
     // CTA carries the service into contact
     expect(screen.getByRole("link", { name: /Start an AI project/i })).toHaveAttribute(

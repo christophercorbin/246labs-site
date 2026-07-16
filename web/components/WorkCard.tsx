@@ -1,12 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Work } from "@/lib/work";
 
 export function WorkCard({ work }: { work: Work }) {
   return (
-    <a
-      href={work.href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/work/${work.slug}`}
       className="card group flex flex-col overflow-hidden border border-hairline bg-white"
     >
       {/* Thumbnail zone — a real screenshot (16:9) when `image` is set,
@@ -36,9 +35,9 @@ export function WorkCard({ work }: { work: Work }) {
         </h3>
         <p className="mt-2 flex-1 text-ink/80">{work.blurb}</p>
         <span className="mt-4 font-mono text-xs uppercase tracking-label text-muted group-hover:text-gold">
-          Visit ↗
+          View case study →
         </span>
       </div>
-    </a>
+    </Link>
   );
 }
