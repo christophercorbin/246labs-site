@@ -18,4 +18,14 @@ describe("About page", () => {
     const sumdeting = screen.getByRole("link", { name: /SumDeTing/i });
     expect(sumdeting).toHaveAttribute("href", "https://sumdeting.246labs.cloud");
   });
+
+  it("closes with a call to action into contact and work", () => {
+    render(<About />);
+    expect(
+      screen.getByRole("link", { name: /start a project/i }),
+    ).toHaveAttribute("href", "/contact");
+    expect(
+      screen.getByRole("link", { name: /see our work/i }),
+    ).toHaveAttribute("href", "/#work");
+  });
 });

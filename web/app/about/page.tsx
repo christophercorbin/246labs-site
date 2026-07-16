@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { Button } from "@/components/Button";
+
 export const metadata = {
   title: "About — 246Labs",
   description:
@@ -78,6 +81,22 @@ export default function About() {
           <span className="font-mono text-xs uppercase tracking-label text-muted">
             CONSULTING · DEVOPS · WEB APPS · HOSTING
           </span>
+        </div>
+        <div className="mt-16 border-t border-hairline pt-10">
+          <h2 className="font-sans text-2xl font-bold tracking-wordmark text-flag-blue">
+            Let&apos;s build something that stays here.
+          </h2>
+          <div className="mt-6 flex flex-wrap items-center gap-6">
+            <Button href="/contact" variant="primary">
+              Start a project
+            </Button>
+            <Link
+              href="/#work"
+              className="font-mono text-xs uppercase tracking-label text-flag-blue underline hover:text-gold"
+            >
+              See our work →
+            </Link>
+          </div>
         </div>
       </div>
     </section>
