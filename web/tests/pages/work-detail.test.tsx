@@ -26,6 +26,8 @@ describe("work detail page", () => {
       "href",
       "/services/ai",
     );
+    // outcome section
+    expect(screen.getByText(/The result/i)).toBeInTheDocument();
     // back link
     expect(screen.getByRole("link", { name: /Work/i })).toHaveAttribute("href", "/#work");
   });

@@ -87,20 +87,18 @@ export default async function ServiceDetailPage({
           {(proof.length > 0 || group.proofNote) && (
             <div className="mt-12">
               <h2 className="font-mono text-xs uppercase tracking-label text-muted">
-                {proof.length > 0 ? "See it live" : "We practice what we preach"}
+                {proof.length > 0 ? "Case studies" : "We practice what we preach"}
               </h2>
               {proof.length > 0 ? (
                 <ul className="mt-4 space-y-3">
                   {proof.map((w) => (
                     <li key={w.slug} className="text-ink/80">
-                      <a
-                        href={w.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={`/work/${w.slug}`}
                         className="font-bold text-flag-blue underline hover:text-gold"
                       >
                         {w.name}
-                      </a>
+                      </Link>
                       <span> — {w.blurb}</span>
                     </li>
                   ))}
