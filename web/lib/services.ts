@@ -41,9 +41,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     key: "build",
     title: "Build",
     blurb:
-      "Ship the product. Web apps, mobile-ready apps, and reworks of sites that have outgrown themselves.",
+      "Turn the idea into a product — custom-built web and mobile-ready apps, engineered end to end. Not a template with your logo on it.",
     description:
-      "We design and ship web and mobile-ready applications end to end — and rebuild the sites and apps that have outgrown what they started as, without a rewrite-for-its-own-sake.",
+      "We turn your idea into a real, custom-built product — web and mobile-ready, engineered end to end. Not a template with your logo on it.",
     deliverables: [
       "Web & mobile-ready apps",
       "Site & app rebuilds",
@@ -51,7 +51,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     ],
     items: ["Web app development", "App building", "Website reworks"],
     longIntro:
-      "Ship the product. We design and build web and mobile-ready applications end to end — and rebuild the sites and apps that have outgrown what they started as, without a rewrite for its own sake. You get software that works, that you can maintain, and that looks like you meant it.",
+      "Turn the idea into a product. We take what you've sketched and engineer it into a real, custom-built product — web and mobile-ready, end to end — and rebuild the sites and apps that have outgrown themselves, without a rewrite for its own sake. Not a template with your logo on it: software you own, that you can maintain, and that looks like you meant it.",
     howWeWork: [
       "Scope the real thing — the smallest version that's actually useful, shipped first.",
       "Design and build in the open — you see working software early, not just mockups.",
