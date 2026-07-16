@@ -30,11 +30,11 @@ export default async function ContactPage({
         Start a project.
       </h1>
       <p className="mt-4 text-lg text-ink/80">
-        Tell us what you&apos;re building. Or email{" "}
+        Tell us what you&apos;re building — or just what you&apos;re stuck on. No
+        pitch, no obligation. Prefer email?{" "}
         <a className="text-flag-blue underline" href="mailto:hello@246labs.cloud">
           hello@246labs.cloud
         </a>
-        .
       </p>
       <p className="mt-2 font-mono text-xs uppercase tracking-label text-muted">
         Based in Barbados · Working across the Caribbean and beyond · We reply
