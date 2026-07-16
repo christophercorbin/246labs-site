@@ -19,6 +19,9 @@ describe("sitemap", () => {
       "https://246labs.cloud/services/cloud",
       "https://246labs.cloud/services/assurance",
       "https://246labs.cloud/services/hardware",
+      "https://246labs.cloud/work/sumdeting",
+      "https://246labs.cloud/work/bimweather",
+      "https://246labs.cloud/work/cargolink",
     ]);
   });
 });
