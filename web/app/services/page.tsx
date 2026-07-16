@@ -20,10 +20,9 @@ export default function ServicesPage() {
             Services
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-ink/80">
-            We design, build, run, and secure cloud and AI systems — the same
-            rigor you&apos;d expect from a firm in San Francisco or London,
-            engineered from Barbados. Pick a lane or hand us the whole thing, as
-            a scoped project or an ongoing retainer.
+            We design, build, run, and secure cloud and AI systems — San
+            Francisco rigor, engineered from Barbados. Take one lane or hand us
+            the whole thing: a scoped project or an ongoing retainer.
           </p>
         </div>
       </section>
