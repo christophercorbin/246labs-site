@@ -3,6 +3,7 @@ import { BootAnimation } from "@/components/BootAnimation";
 import { Button } from "@/components/Button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { WorkCard } from "@/components/WorkCard";
+import { BookCall } from "@/components/BookCall";
 import { SERVICE_GROUPS } from "@/lib/services";
 import { SELECTED_WORK } from "@/lib/work";
 
@@ -119,6 +120,7 @@ export default function Home() {
             <Button href="/about" variant="ghost">
               Our story
             </Button>
+            <BookCall variant="ghost" />
           </div>
         </div>
       </section>
