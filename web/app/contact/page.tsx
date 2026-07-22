@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
+import { BookCall } from "@/components/BookCall";
 import { SERVICE_GROUPS } from "@/lib/services";
 
 export const metadata = {
@@ -40,6 +41,12 @@ export default async function ContactPage({
         Based in Barbados · Working across the Caribbean and beyond · We reply
         within 1 business day
       </p>
+      <div className="mt-8 flex flex-col items-start gap-3 border-t border-hairline pt-8">
+        <p className="text-ink/80">
+          Prefer to talk first? Grab a 30-minute intro call — no pitch.
+        </p>
+        <BookCall label="Book a 30-min call" />
+      </div>
       <div className="mt-10">
         <ContactForm defaultMessage={defaultMessage} />
       </div>

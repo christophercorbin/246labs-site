@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/Button";
+import { BookCall } from "@/components/BookCall";
 
 export const metadata = {
   title: "About — 246Labs",
@@ -90,6 +91,7 @@ export default function About() {
             <Button href="/contact" variant="primary">
               Start a project
             </Button>
+            <BookCall variant="primary" />
             <Link
               href="/#work"
               className="font-mono text-xs uppercase tracking-label text-flag-blue underline hover:text-gold"
