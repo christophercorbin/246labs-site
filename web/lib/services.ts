@@ -65,9 +65,9 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     key: "run",
     title: "Run",
     blurb:
-      "Keep it live and fast. Hosting, pipelines, and the boring maintenance that keeps you out of the news.",
+      "Keep it live. Keep it fast. Managed hosting, push-button deploys, and the monitoring that keeps you out of the news.",
     description:
-      "We keep what you've shipped fast, available, and quietly maintained: managed hosting, push-button deploys, and the unglamorous upkeep that prevents the 2 a.m. outage.",
+      "We keep what you've shipped up, fast, and quietly maintained — managed hosting, push-button deploys, and monitoring that reaches us before it reaches your customers. The 2 a.m. outage that never happens.",
     deliverables: [
       "Managed hosting",
       "CI/CD deploy pipelines",
@@ -75,7 +75,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     ],
     items: ["Hosting", "CI/CD pipelines", "App maintenance"],
     longIntro:
-      "Keep it live and fast. We host what you've shipped, deploy it with push-button pipelines, and handle the unglamorous upkeep that prevents the 2 a.m. outage — patching, backups, monitoring, and the alerts that reach us before they reach your customers.",
+      "Keep it live. Keep it fast. We host what you've shipped, deploy it with push-button pipelines, and handle the upkeep that keeps you off the incident report — patching, backups, and monitoring with alerts that reach us before they reach your customers. The 2 a.m. outage that never happens.",
     howWeWork: [
       "Take stock — what's running, where, and what breaks it.",
       "Make deploys boring — push-button pipelines, no hand-edited servers.",

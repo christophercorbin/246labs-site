@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BootAnimation } from "@/components/BootAnimation";
 import { Button } from "@/components/Button";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -22,10 +23,9 @@ export default function Home() {
             We build, run, and secure your cloud &amp; AI.
           </h1>
           <p className="max-w-2xl text-xl text-white/80">
-            246Labs is a Caribbean cloud and AI studio. We build the software,
-            run the infrastructure, and keep it secure — the same rigor
-            you&apos;d expect from a firm in San Francisco or London, engineered
-            from Barbados and delivered anywhere.
+            A Caribbean cloud and AI studio. We build the software, run the
+            infrastructure, and keep it secure — San Francisco rigor, engineered
+            from Barbados, delivered anywhere.
           </p>
           <div className="flex gap-4">
             <Button href="/contact" variant="primary">
@@ -35,6 +35,30 @@ export default function Home() {
               See services
             </Button>
           </div>
+          <p data-proof className="max-w-2xl text-sm text-white/60">
+            The same stack runs our own products —{" "}
+            <Link
+              href="/work/sumdeting"
+              className="text-white/90 underline hover:text-gold"
+            >
+              SumDeTing
+            </Link>
+            ,{" "}
+            <Link
+              href="/work/bimweather"
+              className="text-white/90 underline hover:text-gold"
+            >
+              Bim Weather
+            </Link>
+            , and{" "}
+            <Link
+              href="/work/cargolink"
+              className="text-white/90 underline hover:text-gold"
+            >
+              CargoLink
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
