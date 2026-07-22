@@ -12,9 +12,14 @@ export default function NotFound() {
           The address may have changed, or the page was never here. Either way —
           nothing to debug on your end.
         </p>
-        <Button href="/" variant="primary">
-          Back to home
-        </Button>
+        <div className="flex flex-wrap gap-4">
+          <Button href="/" variant="primary">
+            Back to home
+          </Button>
+          <Button href="/services" variant="ghost">
+            See what we do
+          </Button>
+        </div>
       </div>
     </section>
   );
