@@ -6,9 +6,8 @@ describe("About page", () => {
   it("keeps the Built on AWS badge and descriptor line", () => {
     render(<About />);
     expect(screen.getByText(/Built on AWS/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/CONSULTING · DEVOPS · WEB APPS · HOSTING/i),
-    ).toBeInTheDocument();
+    // Descriptor line is derived from the live service catalogue.
+    expect(screen.getByText(/AI · Build · Run · Cloud & DevOps/i)).toBeInTheDocument();
   });
 
   it("names the founder and points to real work as proof", () => {

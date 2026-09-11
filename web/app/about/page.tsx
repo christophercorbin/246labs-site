@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/Button";
 import { BookCall } from "@/components/BookCall";
+import { SERVICE_GROUPS } from "@/lib/services";
 
 export const metadata = {
   title: "About — 246Labs",
@@ -80,7 +81,7 @@ export default function About() {
             Built on AWS
           </span>
           <span className="font-mono text-xs uppercase tracking-label text-muted">
-            CONSULTING · DEVOPS · WEB APPS · HOSTING
+            {SERVICE_GROUPS.map((g) => g.title).join(" · ")}
           </span>
         </div>
         <div className="mt-16 border-t border-hairline pt-10">
@@ -91,7 +92,7 @@ export default function About() {
             <Button href="/contact" variant="primary">
               Start a project
             </Button>
-            <BookCall variant="primary" />
+            <BookCall variant="outline" />
             <Link
               href="/#work"
               className="font-mono text-xs uppercase tracking-label text-flag-blue underline hover:text-gold"

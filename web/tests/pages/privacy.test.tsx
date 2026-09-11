@@ -17,4 +17,14 @@ describe("footer", () => {
     render(<Footer />);
     expect(screen.getByRole("link", { name: /privacy/i })).toHaveAttribute("href", "/privacy");
   });
+
+  it("lists every service from the catalogue, linked to its page", () => {
+    render(<Footer />);
+    for (const g of SERVICE_GROUPS) {
+      expect(screen.getByRole("link", { name: g.title })).toHaveAttribute(
+        "href",
+        `/services/${g.key}`,
+      );
+    }
+  });
 });
