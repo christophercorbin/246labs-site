@@ -10,11 +10,21 @@ export type ServiceGroup = {
   relatedWork?: string[];
   proofNote?: string;
   ctaLabel: string;
+  // Entry price band shown as "Projects from …" / "From …". Optional so a
+  // service can stay quote-only; keep it a display string (currency + unit).
+  startingFrom?: string;
+  // Typical engagement length, e.g. "2–6 weeks". Optional.
+  timeline?: string;
+  // "core" services sit in the main grid; "local" ones (on-site work that only
+  // makes sense in Barbados) are listed in a footnote line under it so they
+  // don't anchor the premium offer down. Defaults to "core".
+  tier?: "core" | "local";
 };
 
 export const SERVICE_GROUPS: ServiceGroup[] = [
   {
     key: "ai",
+    startingFrom: "US$4,000",
     title: "AI",
     blurb:
       "Put AI to work where it actually moves the needle — no hype, no science projects.",
@@ -39,6 +49,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     key: "build",
+    startingFrom: "US$7,500",
     title: "Build",
     blurb:
       "Turn the idea into a product — custom-built web and mobile-ready apps, engineered end to end. Not a template with your logo on it.",
@@ -63,6 +74,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     key: "run",
+    startingFrom: "US$1,000/mo",
     title: "Run",
     blurb:
       "Keep it live. Keep it fast. Managed hosting, push-button deploys, and the monitoring that keeps you out of the news.",
@@ -87,6 +99,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     key: "cloud",
+    startingFrom: "US$5,000",
     title: "Cloud & DevOps",
     blurb:
       "AWS done properly — infrastructure as code, sane environments, and automation you can trust.",
@@ -112,6 +125,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     key: "assurance",
+    startingFrom: "US$4,000",
     title: "Assurance",
     blurb:
       "Know where you stand. Security and compliance audits with findings you can act on.",
@@ -137,6 +151,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   },
   {
     key: "hardware",
+    tier: "local",
     title: "Hardware",
     blurb:
       "When the problem is physical, we fix that too — practical support for the machines you depend on.",
@@ -158,3 +173,8 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
     ctaLabel: "Get hardware help →",
   },
 ];
+
+// Main-grid services (everything not marked local).
+export const CORE_SERVICES = SERVICE_GROUPS.filter((g) => g.tier !== "local");
+// Barbados-only, on-site services shown as a footnote under the grid.
+export const LOCAL_SERVICES = SERVICE_GROUPS.filter((g) => g.tier === "local");

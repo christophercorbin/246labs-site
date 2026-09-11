@@ -28,4 +28,21 @@ describe("ServiceCard", () => {
       expect(container.querySelector("svg")).not.toBeNull();
     }
   });
+
+  it("omits the pricing row when no band is set", () => {
+    const { container } = render(
+      <ServiceCard group={{ ...ai, startingFrom: undefined, timeline: undefined }} />,
+    );
+    expect(container.querySelector("[data-pricing]")).toBeNull();
+  });
+
+  it("renders the entry price band and timeline when set", () => {
+    render(
+      <ServiceCard
+        group={{ ...ai, startingFrom: "US$8,000", timeline: "2–6 weeks" }}
+      />,
+    );
+    expect(screen.getByText(/From US\$8,000/)).toBeInTheDocument();
+    expect(screen.getByText("2–6 weeks")).toBeInTheDocument();
+  });
 });

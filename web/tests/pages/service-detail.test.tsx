@@ -20,9 +20,14 @@ describe("service detail page", () => {
       "/work/sumdeting",
     );
     // CTA carries the service into contact
-    expect(screen.getByRole("link", { name: /Start an AI project/i })).toHaveAttribute(
+    // CTA appears above the fold and again at the end; both carry the service.
+    const ctas = screen.getAllByRole("link", { name: /Start an AI project/i });
+    expect(ctas.length).toBeGreaterThanOrEqual(1);
+    for (const cta of ctas) expect(cta).toHaveAttribute("href", "/contact?service=ai");
+    // Lower-friction secondary path
+    expect(screen.getAllByRole("link", { name: /Book a call/i })[0]).toHaveAttribute(
       "href",
-      "/contact?service=ai",
+      expect.stringContaining("cal.com"),
     );
     // back link
     expect(screen.getByRole("link", { name: /Services/i })).toHaveAttribute("href", "/services");

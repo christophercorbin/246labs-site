@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SERVICE_GROUPS } from "@/lib/services";
 import { SELECTED_WORK } from "@/lib/work";
 import { Button } from "@/components/Button";
+import { BookCall } from "@/components/BookCall";
 
 export function generateStaticParams() {
   return SERVICE_GROUPS.map((g) => ({ slug: g.key }));
@@ -51,6 +52,41 @@ export default async function ServiceDetailPage({
             {group.title}
           </h1>
           <p className="mt-4 text-lg text-ink/80">{group.longIntro}</p>
+
+          {(group.startingFrom || group.timeline) && (
+            <dl
+              data-pricing
+              className="mt-8 grid max-w-md grid-cols-2 gap-6 rounded-tile border border-hairline bg-white p-6"
+            >
+              {group.startingFrom && (
+                <div>
+                  <dt className="font-mono text-xs uppercase tracking-label text-muted">
+                    From
+                  </dt>
+                  <dd className="mt-1 font-sans text-3xl font-bold tracking-wordmark text-flag-blue">
+                    {group.startingFrom}
+                  </dd>
+                </div>
+              )}
+              {group.timeline && (
+                <div>
+                  <dt className="font-mono text-xs uppercase tracking-label text-muted">
+                    Typical timeline
+                  </dt>
+                  <dd className="mt-1 font-sans text-3xl font-bold tracking-wordmark text-flag-blue">
+                    {group.timeline}
+                  </dd>
+                </div>
+              )}
+            </dl>
+          )}
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button href={`/contact?service=${group.key}`} variant="primary">
+              {group.ctaLabel}
+            </Button>
+            <BookCall variant="outline" />
+          </div>
         </div>
       </section>
 

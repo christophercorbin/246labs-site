@@ -1,10 +1,11 @@
-import { SERVICE_GROUPS } from "@/lib/services";
+import { CORE_SERVICES } from "@/lib/services";
 import { ServiceCard } from "@/components/ServiceCard";
+import { LocalServicesNote } from "@/components/LocalServicesNote";
 
 export const metadata = {
   title: "Services — 246Labs",
   description:
-    "AI, build, run, cloud & DevOps, assurance, and hardware — everything 246Labs offers.",
+    "AI, build, run, cloud & DevOps, and assurance — with entry prices — plus on-site hardware support in Barbados. Everything 246Labs offers.",
   alternates: { canonical: "/services" },
 };
 
@@ -29,10 +30,11 @@ export default function ServicesPage() {
       <section className="reveal bg-white">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {SERVICE_GROUPS.map((group) => (
+            {CORE_SERVICES.map((group) => (
               <ServiceCard key={group.key} group={group} />
             ))}
           </div>
+          <LocalServicesNote className="mt-10" />
         </div>
       </section>
     </>

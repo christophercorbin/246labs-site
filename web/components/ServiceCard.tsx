@@ -57,6 +57,23 @@ export function ServiceCard({ group }: { group: ServiceGroup }) {
           </li>
         ))}
       </ul>
+      {(group.startingFrom || group.timeline) && (
+        <p
+          data-pricing
+          className="mt-5 flex flex-wrap items-baseline gap-x-3 border-t border-hairline pt-4"
+        >
+          {group.startingFrom && (
+            <span className="font-sans text-lg font-bold text-flag-blue">
+              From {group.startingFrom}
+            </span>
+          )}
+          {group.timeline && (
+            <span className="font-mono text-xs uppercase tracking-label text-muted">
+              {group.timeline}
+            </span>
+          )}
+        </p>
+      )}
       <span className="mt-5 block font-mono text-xs uppercase tracking-label text-muted group-hover:text-gold">
         Explore {group.title} →
       </span>
