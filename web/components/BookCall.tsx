@@ -12,7 +12,7 @@ export function BookCall({
   className = "",
   label = "Book a call",
 }: {
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "outline";
   className?: string;
   label?: string;
 }) {

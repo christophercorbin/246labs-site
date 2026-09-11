@@ -2,7 +2,7 @@ import Link from "next/link";
 
 type ButtonProps = {
   href?: string;
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "outline";
   className?: string;
   // When true (with href), render an external anchor that opens in a new tab
   // instead of a client-side <Link>.
@@ -13,8 +13,12 @@ type ButtonProps = {
 const styles = {
   primary:
     "bg-gold text-navy hover:brightness-95 border border-transparent",
+  // Secondary on dark bands.
   ghost:
     "bg-transparent text-white hover:bg-white/10 border border-white/30",
+  // Secondary on light bands (paper / white).
+  outline:
+    "bg-transparent text-flag-blue hover:bg-flag-blue/5 border border-flag-blue/40",
 };
 
 export function Button({
