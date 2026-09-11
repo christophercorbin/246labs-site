@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SELECTED_WORK } from "@/lib/work";
 import { SERVICE_GROUPS } from "@/lib/services";
 import { Button } from "@/components/Button";
+import { BookCall } from "@/components/BookCall";
 
 export function generateStaticParams() {
   return SELECTED_WORK.map((w) => ({ slug: w.slug }));
@@ -51,16 +53,45 @@ export default async function WorkDetailPage({
             {work.name}
           </h1>
           <p className="mt-4 text-lg text-ink/80">{work.blurb}</p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Button href={work.href} external variant="primary">
+              Visit it live ↗
+            </Button>
+            <BookCall variant="outline" label="Book a call about a build like this" />
+          </div>
         </div>
+
+        {/* Product screenshot — the thing itself, not a description of it. */}
+        {work.image && (
+          <div className="mx-auto max-w-5xl px-6 pb-16">
+            <div
+              data-work-hero-image
+              className="card relative aspect-video overflow-hidden border border-hairline bg-gradient-to-br from-navy to-flag-blue"
+            >
+              <Image
+                src={work.image}
+                alt={`${work.name} — screenshot of the live product`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-cover object-top"
+              />
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="bg-white">
         <div className="mx-auto max-w-3xl px-6 py-16">
           {work.metrics && work.metrics.length > 0 && (
-            <dl data-metrics className="mb-12 grid gap-6 sm:grid-cols-3">
+            <dl
+              data-metrics
+              aria-label="At a glance"
+              className="mb-12 grid gap-6 rounded-tile border border-hairline bg-paper p-6 sm:grid-cols-3"
+            >
               {work.metrics.map((m) => (
                 <div key={m.label}>
-                  <dt className="font-sans text-3xl font-bold text-flag-blue">
+                  <dt className="font-sans text-3xl font-bold tracking-wordmark text-flag-blue">
                     {m.value}
                   </dt>
                   <dd className="mt-1 font-mono text-xs uppercase tracking-label text-muted">
@@ -125,21 +156,20 @@ export default async function WorkDetailPage({
             </>
           )}
 
-          <div className="mt-12">
-            <a
-              href={work.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-xs uppercase tracking-label text-flag-blue underline hover:text-gold"
-            >
-              Visit it live ↗
-            </a>
-          </div>
-
-          <div className="mt-8">
-            <Button href="/contact" variant="primary">
-              Start a project
-            </Button>
+          <div className="mt-12 rounded-tile border border-hairline bg-paper p-6">
+            <p className="font-mono text-xs uppercase tracking-label text-muted">
+              Want something like this?
+            </p>
+            <p className="mt-2 text-ink/80">
+              Same team, same stack, built for your business. Tell us the problem
+              and we&apos;ll tell you what it takes.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-4">
+              <Button href="/contact" variant="primary">
+                Start a project
+              </Button>
+              <BookCall variant="outline" />
+            </div>
           </div>
 
           {services.length > 0 && (

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import WorkDetailPage, { generateStaticParams } from "@/app/work/[slug]/page";
 import { SELECTED_WORK } from "@/lib/work";
@@ -32,11 +32,35 @@ describe("work detail page", () => {
     expect(screen.getByRole("link", { name: /Work/i })).toHaveAttribute("href", "/#work");
   });
 
-  it("omits the metrics band when no metrics are set", async () => {
+  it("shows the product itself: hero screenshot with a descriptive alt", async () => {
     const { container } = render(
       await WorkDetailPage({ params: Promise.resolve({ slug: "sumdeting" }) }),
     );
-    expect(container.querySelector("[data-metrics]")).toBeNull();
+    const hero = container.querySelector("[data-work-hero-image] img");
+    expect(hero).not.toBeNull();
+    expect(hero).toHaveAttribute("alt", expect.stringMatching(/SumDeTing/));
+  });
+
+  it("offers a lower-friction call alongside the project CTA", async () => {
+    render(await WorkDetailPage({ params: Promise.resolve({ slug: "sumdeting" }) }));
+    const calls = screen.getAllByRole("link", { name: /Book a call/i });
+    expect(calls.length).toBeGreaterThanOrEqual(1);
+    for (const c of calls) expect(c).toHaveAttribute("href", expect.stringContaining("cal.com"));
+    expect(screen.getByRole("link", { name: /Start a project/i })).toHaveAttribute(
+      "href",
+      "/contact",
+    );
+  });
+
+  it("renders an at-a-glance facts band from work.metrics", async () => {
+    const { container } = render(
+      await WorkDetailPage({ params: Promise.resolve({ slug: "sumdeting" }) }),
+    );
+    const band = container.querySelector("[data-metrics]");
+    expect(band).not.toBeNull();
+    const sumdeting = SELECTED_WORK.find((w) => w.slug === "sumdeting")!;
+    expect(band!.querySelectorAll("dt")).toHaveLength(sumdeting.metrics!.length);
+    expect(within(band as HTMLElement).getByText("Socratic")).toBeInTheDocument();
   });
 
   it("404s on an unknown slug", async () => {

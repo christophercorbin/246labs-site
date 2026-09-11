@@ -34,6 +34,12 @@ export const SELECTED_WORK: Work[] = [
     outcome:
       "A patient, always-available tutor that meets Caribbean students where they are — the same standard of AI product we'd build for a client.",
     stack: ["Claude", "Amazon Bedrock", "AWS"],
+    // Facts only — provable from the build. No usage numbers until we have them.
+    metrics: [
+      { value: "Claude", label: "via Amazon Bedrock, in our own AWS" },
+      { value: "Socratic", label: "guides to the answer, never hands it over" },
+      { value: "Any device", label: "web app, no install" },
+    ],
     relatedServices: ["ai", "build"],
   },
   {
@@ -54,6 +60,11 @@ export const SELECTED_WORK: Work[] = [
     outcome:
       "Real-time weather and hurricane tracking Barbadians can rely on when it matters most.",
     stack: ["AWS"],
+    metrics: [
+      { value: "Live", label: "radar, forecasts & storm alerts" },
+      { value: "Parish", label: "level resolution across Barbados" },
+      { value: "24/7", label: "run and monitored on AWS" },
+    ],
     relatedServices: ["build", "run"],
   },
   {
@@ -74,6 +85,11 @@ export const SELECTED_WORK: Work[] = [
     outcome:
       "A smarter way to ship — logistics coordination without the runaround.",
     stack: ["AWS"],
+    metrics: [
+      { value: "One place", label: "booking and tracking together" },
+      { value: "Mobile", label: "built for operators away from a desk" },
+      { value: "CI/CD", label: "least-privilege AWS deploys" },
+    ],
     relatedServices: ["build", "run"],
   },
 ];
