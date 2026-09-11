@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BootAnimation } from "@/components/BootAnimation";
+import { ProofPanel } from "@/components/ProofPanel";
 import { Button } from "@/components/Button";
 import { ServiceCard } from "@/components/ServiceCard";
 import { WorkCard } from "@/components/WorkCard";
 import { BookCall } from "@/components/BookCall";
-import { SERVICE_GROUPS } from "@/lib/services";
+import { LocalServicesNote } from "@/components/LocalServicesNote";
+import { CORE_SERVICES } from "@/lib/services";
 import { SELECTED_WORK } from "@/lib/work";
 
 export const metadata: Metadata = {
@@ -15,50 +16,53 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Hero (navy) */}
+      {/* Hero (navy) — copy left, terminal proof panel right on large screens */}
       <section className="bg-navy">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-28">
-          <BootAnimation />
-          <h1 className="max-w-3xl font-sans text-4xl font-bold leading-tight tracking-wordmark text-white sm:text-5xl">
-            We build, run, and secure your cloud &amp; AI.
-          </h1>
-          <p className="max-w-2xl text-xl text-white/80">
-            A Caribbean cloud and AI studio. We build the software, run the
-            infrastructure, and keep it secure — San Francisco rigor, engineered
-            from Barbados, delivered anywhere.
-          </p>
-          <div className="flex gap-4">
-            <Button href="/contact" variant="primary">
-              Start a project
-            </Button>
-            <Button href="/services" variant="ghost">
-              See services
-            </Button>
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:py-28">
+          <div className="flex flex-col gap-8">
+            <h1 className="font-sans text-4xl font-bold leading-tight tracking-wordmark text-white sm:text-5xl">
+              We build, run, and secure your cloud &amp; AI.
+            </h1>
+            <p className="max-w-2xl text-xl text-white/80">
+              A Caribbean cloud and AI studio. We build the software, run the
+              infrastructure, and keep it secure — San Francisco rigor,
+              engineered from Barbados, delivered anywhere.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button href="/contact" variant="primary">
+                Start a project
+              </Button>
+              <BookCall variant="ghost" />
+              <Button href="/services" variant="ghost">
+                See services
+              </Button>
+            </div>
+            <p data-proof className="max-w-2xl text-sm text-white/60">
+              The same stack runs our own products —{" "}
+              <Link
+                href="/work/sumdeting"
+                className="text-white/90 underline hover:text-gold"
+              >
+                SumDeTing
+              </Link>
+              ,{" "}
+              <Link
+                href="/work/bimweather"
+                className="text-white/90 underline hover:text-gold"
+              >
+                Bim Weather
+              </Link>
+              , and{" "}
+              <Link
+                href="/work/cargolink"
+                className="text-white/90 underline hover:text-gold"
+              >
+                CargoLink
+              </Link>
+              .
+            </p>
           </div>
-          <p data-proof className="max-w-2xl text-sm text-white/60">
-            The same stack runs our own products —{" "}
-            <Link
-              href="/work/sumdeting"
-              className="text-white/90 underline hover:text-gold"
-            >
-              SumDeTing
-            </Link>
-            ,{" "}
-            <Link
-              href="/work/bimweather"
-              className="text-white/90 underline hover:text-gold"
-            >
-              Bim Weather
-            </Link>
-            , and{" "}
-            <Link
-              href="/work/cargolink"
-              className="text-white/90 underline hover:text-gold"
-            >
-              CargoLink
-            </Link>
-            .
-          </p>
+          <ProofPanel />
         </div>
       </section>
 
@@ -99,10 +103,11 @@ export default function Home() {
             What we do
           </p>
           <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {SERVICE_GROUPS.map((group) => (
+            {CORE_SERVICES.map((group) => (
               <ServiceCard key={group.key} group={group} />
             ))}
           </div>
+          <LocalServicesNote className="mt-10" />
         </div>
       </section>
 
@@ -137,7 +142,7 @@ export default function Home() {
           <h2 className="font-sans text-3xl font-bold tracking-wordmark text-white">
             Built in the Caribbean, delivered anywhere.
           </h2>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Button href="/contact" variant="primary">
               Start a project
             </Button>
