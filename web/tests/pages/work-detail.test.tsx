@@ -14,8 +14,8 @@ describe("work detail page", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "SumDeTing" }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/The problem/i)).toBeInTheDocument();
-    expect(screen.getByText(/What we built/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: /The problem/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: /What we built/i })).toBeInTheDocument();
     // live product link (external)
     expect(screen.getByRole("link", { name: /Visit it live/i })).toHaveAttribute(
       "href",

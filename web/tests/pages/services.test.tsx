@@ -27,6 +27,6 @@ describe("Services page", () => {
   it("shows an entry price on every core service card", () => {
     const { container } = render(<ServicesPage />);
     expect(container.querySelectorAll("[data-pricing]")).toHaveLength(CORE_SERVICES.length);
-    expect(screen.getByText(/From US\$4,000/)).toBeInTheDocument();
+    expect(screen.getAllByText(/From US\$4,000/).length).toBeGreaterThan(0);
   });
 });

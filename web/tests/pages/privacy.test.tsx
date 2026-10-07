@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import Privacy from "@/app/privacy/page";
 import { Footer } from "@/components/Footer";
+import { SERVICE_GROUPS } from "@/lib/services";
 
 describe("privacy page", () => {
   it("names what the contact form collects and how to reach us", () => {
